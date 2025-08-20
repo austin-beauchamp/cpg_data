@@ -76,18 +76,143 @@ view: mars_dcom_2023_2025_table {
     type: string
     sql: ${TABLE}.Region ;;
   }
+  dimension: gsv_dim {
+    description: "GSV — Gross Sales Value at the manufacturer invoice price before trade discounts and deductions"
+    type: number
+    sql: ${TABLE}.Gsv ;;
+    value_format_name: usd_0
+  }
   measure: gsv {
     description: "GSV — Gross Sales Value at the manufacturer invoice price before trade discounts and deductions"
     type: sum
     sql: ${TABLE}.Gsv ;;
     value_format_name: usd
   }
+  measure: gsv_click_and_mortar {
+    hidden: no
+    type: sum
+    sql: ${gsv_dim} ;;
+    filters: {
+      field: channel
+      value: "CLICK & MORTAR"
+
+    }
+    value_format_name: usd_0
+  }
+
+  measure: gsv_click_odd {
+    hidden: no
+    type: sum
+    sql: ${gsv_dim} ;;
+    filters: {
+      field: channel
+      value: "ON DEMAND DELIVERY"
+
+    }
+    value_format_name: usd_0
+  }
+  measure: gsv_click_pure_play {
+    hidden: no
+    type: sum
+    sql: ${gsv_dim} ;;
+    filters: {
+      field: channel
+      value: "PURE-PLAY"
+
+    }
+    value_format_name: usd_0
+  }
+
+  dimension: cogs_dim {
+    description: "COGS — Cost of Goods Sold (manufacturing + freight-in and any standard product costs tied to the units sold)"
+    type: number
+    sql: ${TABLE}.Cogs ;;
+    value_format_name: usd
+  }
+
   measure: cogs {
     description: "COGS — Cost of Goods Sold (manufacturing + freight-in and any standard product costs tied to the units sold)"
     type: sum
     sql: ${TABLE}.Cogs ;;
     value_format_name: usd
   }
+  measure: cogs_click_and_mortar {
+    hidden: no
+    type: sum
+    sql: ${cogs_dim} ;;
+    filters: {
+      field: channel
+      value: "CLICK & MORTAR"
+
+    }
+    value_format_name: usd_0
+  }
+
+  measure: cogs_click_odd {
+    hidden: no
+    type: sum
+    sql: ${cogs_dim} ;;
+    filters: {
+      field: channel
+      value: "ON DEMAND DELIVERY"
+
+    }
+    value_format_name: usd_0
+  }
+  measure: cogs_click_pure_play {
+    hidden: no
+    type: sum
+    sql: ${cogs_dim} ;;
+    filters: {
+      field: channel
+      value: "PURE-PLAY"
+
+    }
+    value_format_name: usd_0
+  }
+
+  dimension: mac_dim {
+    description: "MAC — Margin After COGS (contribution margin at the NSV level)"
+    type: number
+    sql: ${TABLE}.Mac ;;
+    value_format_name: usd
+  }
+
+  measure: mac_click_and_mortar {
+    hidden: no
+    type: sum
+    sql: ${mac_dim} ;;
+    filters: {
+      field: channel
+      value: "CLICK & MORTAR"
+
+    }
+    value_format_name: usd_0
+  }
+
+  measure: mac_click_odd {
+    hidden: no
+    type: sum
+    sql: ${mac_dim} ;;
+    filters: {
+      field: channel
+      value: "ON DEMAND DELIVERY"
+
+    }
+    value_format_name: usd_0
+  }
+  measure: mac_click_pure_play {
+    hidden: no
+    type: sum
+    sql: ${mac_dim} ;;
+    filters: {
+      field: channel
+      value: "PURE-PLAY"
+
+    }
+    value_format_name: usd_0
+  }
+
   measure: mac {
     description: "MAC — Margin After COGS (contribution margin at the NSV level)"
     type: sum
@@ -99,6 +224,48 @@ view: mars_dcom_2023_2025_table {
     type: sum
     sql: ${TABLE}.Nsv ;;
     value_format_name: usd
+  }
+
+  dimension: nsv_dim {
+    description: "NSV — Net Sales Value after trade spend and deductions"
+    type: number
+    sql: ${TABLE}.Nsv ;;
+    value_format_name: usd
+  }
+
+  measure: nsv_click_and_mortar {
+    hidden: no
+    type: sum
+    sql: ${nsv_dim} ;;
+    filters: {
+      field: channel
+      value: "CLICK & MORTAR"
+
+    }
+    value_format_name: usd_0
+  }
+
+  measure: nsv_click_odd {
+    hidden: no
+    type: sum
+    sql: ${nsv_dim} ;;
+    filters: {
+      field: channel
+      value: "ON DEMAND DELIVERY"
+
+    }
+    value_format_name: usd_0
+  }
+  measure: nsv_click_pure_play {
+    hidden: no
+    type: sum
+    sql: ${nsv_dim} ;;
+    filters: {
+      field: channel
+      value: "PURE-PLAY"
+
+    }
+    value_format_name: usd_0
   }
   measure: rsv {
     description: "RSV — Retail Sales Value (consumer spend at shelf)"
@@ -117,6 +284,46 @@ view: mars_dcom_2023_2025_table {
     type: sum
     sql: ${TABLE}.Trade_Expenditure ;;
     value_format_name: usd
+  }
+  dimension: trade_expenditure_dim {
+    description: "Trade Expenditure — Total trade discounts/investment (off-invoice, billbacks, rebates, co-op, in-store promos, etc.)"
+    type: number
+    sql: ${TABLE}.Trade_Expenditure ;;
+    value_format_name: usd
+  }
+  measure: trade_expenditure_click_and_mortar {
+    hidden: no
+    type: sum
+    sql: ${trade_expenditure_dim} ;;
+    filters: {
+      field: channel
+      value: "CLICK & MORTAR"
+
+    }
+    value_format_name: usd_0
+  }
+
+  measure: trade_expenditure_click_odd {
+    hidden: no
+    type: sum
+    sql: ${trade_expenditure_dim} ;;
+    filters: {
+      field: channel
+      value: "ON DEMAND DELIVERY"
+
+    }
+    value_format_name: usd_0
+  }
+  measure:trade_expenditure_click_pure_play {
+    hidden: no
+    type: sum
+    sql: ${trade_expenditure_dim} ;;
+    filters: {
+      field: channel
+      value: "PURE-PLAY"
+
+    }
+    value_format_name: usd_0
   }
   measure: count {
     type: count
