@@ -24,6 +24,7 @@ view: mars_forecast_unioned {
     value_format_name: usd_0
   }
   dimension: yyyymm {
+    label: "Accounting Period"
     type: string
     sql: ${TABLE}.yyyymm ;;
   }
