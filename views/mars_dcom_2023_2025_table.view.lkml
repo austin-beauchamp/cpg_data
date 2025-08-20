@@ -81,7 +81,6 @@ view: mars_dcom_2023_2025_table {
     type: sum
     sql: ${TABLE}.Gsv ;;
     value_format_name: usd
-
   }
   measure: cogs {
     description: "COGS — Cost of Goods Sold (manufacturing + freight-in and any standard product costs tied to the units sold)"
