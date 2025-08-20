@@ -77,7 +77,7 @@ view: mars_dcom_2023_2025_table {
     sql: ${TABLE}.Region ;;
   }
   measure: gsv {
-    label: "GSV — Gross Sales Value at the manufacturer invoice price before trade discounts and deductions"
+    description: "GSV — Gross Sales Value at the manufacturer invoice price before trade discounts and deductions"
     type: sum
     sql: ${TABLE}.Gsv ;;
     value_format_name: usd
@@ -95,7 +95,7 @@ view: mars_dcom_2023_2025_table {
     value_format_name: usd
   }
   measure: nsv {
-    label: "NSV — Net Sales Value after trade spend and deductions"
+    description: "NSV — Net Sales Value after trade spend and deductions"
     type: sum
     sql: ${TABLE}.Nsv ;;
     value_format_name: usd
@@ -107,7 +107,7 @@ view: mars_dcom_2023_2025_table {
     value_format_name: usd
   }
   measure: rsv_units {
-    label: "RSV Units — Retail sales volume in units (sell-out units at retail)"
+    description: "RSV Units — Retail sales volume in units (sell-out units at retail)"
     type: sum
     sql: ${TABLE}.Rsv_Units ;;
     value_format_name: decimal_0
