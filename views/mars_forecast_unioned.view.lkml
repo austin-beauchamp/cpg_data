@@ -2,14 +2,14 @@ view: mars_forecast_unioned {
   sql_table_name: `big-query-sales-demo.consumer_packaged_goods.mars_forecast_unioned` ;;
 
   dimension: accounts {
-    label: "Accounts"
-    description: "Clients that the company does transaction with"
+    label: "Account Name"
+    description: "The name of the account"
     type: string
     sql: ${TABLE}.Accounts ;;
   }
   dimension: dcom_scorecard {
     label: "DCOM"
-    description: "DCOM is focused on the efficient and strategic handling of all aspects of the content lifecycle, from ideation to archiving"
+    description: "The type of account."
     type: string
     sql: ${TABLE}.Dcom_scorecard ;;
   }
