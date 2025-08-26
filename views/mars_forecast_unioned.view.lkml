@@ -34,7 +34,8 @@ view: mars_forecast_unioned {
     label: "Dollars"
     type: sum
     sql: ${value};;
-    value_format: "0.0,,\"M\""
+    value_format_name: usd_0
+    # value_format: "0.0,,\"M\""
   }
   measure: 2024_gsv {
     group_label: "GSV"
@@ -52,7 +53,8 @@ view: mars_forecast_unioned {
     type: sum
     sql: ${value} ;;
     filters: [source: "2025_ytd_202507_and_forecast"]
-    value_format: "0.0,,\"M\""
+    value_format_name: usd_0
+    # value_format: "0.0,,\"M\""
   }
   measure: 2025_planned_gsv {
     group_label: "GSV"
@@ -61,7 +63,8 @@ view: mars_forecast_unioned {
     type: sum
     sql: ${value} ;;
     filters: [source: "2025_plan"]
-    value_format: "0.0,,\"M\""
+    value_format_name: usd_0
+    # value_format: "0.0,,\"M\""
   }
 
 
@@ -71,7 +74,8 @@ view: mars_forecast_unioned {
     description: "The difference between 2025 actual data and 2025 planned data."
     type: number
     sql: ${2025_gsv} - ${2025_planned_gsv} ;;
-    value_format: "0.0,,\"M\""
+    value_format_name: usd_0
+    # value_format: "0.0,,\"M\""
     drill_fields: [year_quarter, 2025_gsv, 2025_planned_gsv,2025_actuals_vs_plan_difference_numeric,2025_actuals_vs_plan_difference_percentage]
   }
   measure: 2025_actuals_vs_plan_difference_percentage {
@@ -98,7 +102,8 @@ view: mars_forecast_unioned {
     description: "The difference between 2025 forecast data and 2024 actual data as a percentage."
     type: number
     sql: ${2025_planned_gsv} - ${2024_gsv} ;;
-    value_format: "0.0,,\"M\""
+    value_format_name: usd_0
+    # value_format: "0.0,,\"M\""
   }
 
 
