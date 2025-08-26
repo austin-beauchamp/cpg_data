@@ -338,20 +338,20 @@ view: mars_dcom_2023_2025_table {
     type: sum
     sql: ${gsv_dim} ;;
     filters: [year: "2025"]
-    value_format: "0.0,,\"\""
+    value_format: "$0.0,,\"\""
   }
   measure: gsv_2024 {
     group_label: "Slide 5"
     type: sum
     sql: ${gsv_dim} ;;
     filters: [year: "2024"]
-    value_format: "0.0,,\"\""
+    value_format: "$0.0,,\"\""
   }
   measure: gsv_variance {
     group_label: "Slide 5"
     type: number
     sql: (${gsv_2025}-${gsv_2024}) ;;
-    value_format: "0.0,,\"\""
+    value_format: "$0.0,,\"\""
   }
   measure: gsv_yoy_percentage {
     group_label: "Slide 5"
@@ -365,20 +365,20 @@ view: mars_dcom_2023_2025_table {
     type: sum
     sql: ${nsv_dim} ;;
     filters: [year: "2025"]
-    value_format: "0.0,,\"\""
+    value_format: "$0.0,,\"\""
   }
   measure: nsv_2024 {
     group_label: "Slide 5"
     type: sum
     sql: ${nsv_dim} ;;
     filters: [year: "2024"]
-    value_format: "0.0,,\"\""
+    value_format: "$0.0,,\"\""
   }
   measure: nsv_variance {
     group_label: "Slide 5"
     type: number
     sql: (${nsv_2025}-${nsv_2024}) ;;
-    value_format: "0.0,,\"\""
+    value_format: "$0.0,,\"\""
   }
   measure: nsv_yoy_percentage {
     group_label: "Slide 5"
@@ -392,20 +392,20 @@ view: mars_dcom_2023_2025_table {
     type: sum
     sql: ${cogs_dim} ;;
     filters: [year: "2025"]
-    value_format: "0.0,,\"\""
+    value_format: "$0.0,,\"\""
   }
   measure: cogs_2024 {
     group_label: "Slide 5"
     type: sum
     sql: ${cogs_dim} ;;
     filters: [year: "2024"]
-    value_format: "0.0,,\"\""
+    value_format: "$0.0,,\"\""
   }
   measure: cogs_variance {
     group_label: "Slide 5"
     type: number
     sql: (${cogs_2025}-${cogs_2024}) ;;
-    value_format: "0.0,,\"\""
+    value_format: "$0.0,,\"\""
   }
 
   measure: mac_2025 {
@@ -413,20 +413,20 @@ view: mars_dcom_2023_2025_table {
     type: sum
     sql: ${mac_dim} ;;
     filters: [year: "2025"]
-    value_format: "0.0,,\"\""
+    value_format: "$0.0,,\"\""
   }
   measure: mac_2024 {
     group_label: "Slide 5"
     type: sum
     sql: ${mac_dim} ;;
     filters: [year: "2024"]
-    value_format: "0.0,,\"\""
+    value_format: "$0.0,,\"\""
   }
   measure: mac_variance {
     group_label: "Slide 5"
     type: number
     sql: (${mac_2025}-${mac_2024}) ;;
-    value_format: "0.0,,\"\""
+    value_format: "$0.0,,\"\""
   }
   measure: mac_percentage_2025 {
     group_label: "Slide 5"
@@ -453,20 +453,20 @@ view: mars_dcom_2023_2025_table {
     type: sum
     sql: ${trade_expenditure_dim} ;;
     filters: [year: "2025"]
-    value_format: "0.0,,\"\""
+    value_format: "$0.0,,\"\""
   }
   measure: trade_expenditure_2024 {
     group_label: "Slide 5"
     type: sum
     sql: ${trade_expenditure_dim} ;;
     filters: [year: "2024"]
-    value_format: "0.0,,\"\""
+    value_format: "$0.0,,\"\""
   }
   measure: trade_expenditure_variance {
     group_label: "Slide 5"
     type: number
     sql: (${trade_expenditure_2025}-${trade_expenditure_2024}) ;;
-    value_format: "0.0,,\"\""
+    value_format: "$0.0,,\"\""
   }
   measure: te_gsv_percentage_2025 {
     group_label: "Slide 5"
