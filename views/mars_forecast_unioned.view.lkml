@@ -6,12 +6,14 @@ view: mars_forecast_unioned {
     description: "The name of the account"
     type: string
     sql: ${TABLE}.Accounts ;;
+    drill_fields: [dcom_scorecard]
   }
   dimension: dcom_scorecard {
     label: "DCOM"
     description: "The type of account."
     type: string
     sql: ${TABLE}.Dcom_scorecard ;;
+    drill_fields: [accounts]
   }
   dimension: period {
     hidden: yes
@@ -19,24 +21,36 @@ view: mars_forecast_unioned {
     sql: ${TABLE}.period ;;
   }
   dimension: source {
-    hidden: yes
+    # hidden: yes
     type: string
     sql: ${TABLE}.source ;;
   }
   dimension: value {
-    hidden: yes
+    # hidden: yes
     type: number
     sql: ${TABLE}.value ;;
     # value_format_name: usd_0
   }
   measure: sum_value {
-    hidden: yes
+    # hidden: yes
     label: "Dollars"
     type: sum
     sql: ${value};;
     # value_format_name: usd_0
     value_format: "$0.0,,\"M\""
   }
+
+  measure: total_gsv {
+    group_label: "GSV"
+    label: "Total GSV"
+    description: "2024's and 2025's Gross Sales Value. Represents the total value of all sales of a company's products or services before any deductions are made"
+    type: sum
+    sql: ${value} ;;
+    filters: [mars_forecast_unioned.source: "2024_actual,2025_ytd_202507_and_forecast"]
+    drill_fields: [accounts, dcom_scorecard, year_quarter, period_cleaned, value]
+    value_format: "$0.0,,\"M\""
+  }
+
   measure: 2024_gsv {
     group_label: "GSV"
     label: "Total GSV (2024)"
@@ -44,6 +58,7 @@ view: mars_forecast_unioned {
     type: sum
     sql: ${value} ;;
     filters: [source: "2024_actual"]
+    drill_fields: [accounts, dcom_scorecard, 2024_gsv]
     # value_format_name: usd_0
     value_format: "$0.0,,\"M\""
   }
@@ -54,6 +69,7 @@ view: mars_forecast_unioned {
     type: sum
     sql: ${value} ;;
     filters: [source: "2025_ytd_202507_and_forecast"]
+    drill_fields: [accounts, dcom_scorecard, 2025_gsv]
     # value_format_name: usd_0
     value_format: "$0.0,,\"M\""
   }
@@ -64,6 +80,7 @@ view: mars_forecast_unioned {
     type: sum
     sql: ${value} ;;
     filters: [source: "2025_plan"]
+    drill_fields: [accounts, dcom_scorecard, 2025_planned_gsv]
     # value_format_name: usd_0
     value_format: "$0.0,,\"M\""
   }
@@ -77,7 +94,7 @@ view: mars_forecast_unioned {
     sql: ${2025_gsv} - ${2025_planned_gsv} ;;
     # value_format_name: usd_0
     value_format: "$0.0,,\"M\""
-    drill_fields: [year_quarter, 2025_gsv, 2025_planned_gsv,2025_actuals_vs_plan_difference_numeric,2025_actuals_vs_plan_difference_percentage]
+    drill_fields: [accounts, dcom_scorecard,year_quarter, 2025_gsv, 2025_planned_gsv,2025_actuals_vs_plan_difference_numeric,2025_actuals_vs_plan_difference_percentage]
   }
   measure: 2025_actuals_vs_plan_difference_percentage {
     group_label: "GSV"
@@ -86,7 +103,7 @@ view: mars_forecast_unioned {
     type: number
     sql: safe_divide((${2025_gsv} - ${2025_planned_gsv}),${2025_planned_gsv}) ;;
     value_format_name: percent_0
-    drill_fields: [year_quarter, 2025_gsv, 2025_planned_gsv,2025_actuals_vs_plan_difference_numeric,2025_actuals_vs_plan_difference_percentage]
+    drill_fields: [accounts, dcom_scorecard, year_quarter, 2025_gsv, 2025_planned_gsv,2025_actuals_vs_plan_difference_numeric,2025_actuals_vs_plan_difference_percentage]
   }
 
   measure: yoy_growth_plan_percentage {
@@ -95,6 +112,7 @@ view: mars_forecast_unioned {
     description: "The difference between 2025 forecast data and 2024 actual data as a percentage."
     type: number
     sql: safe_divide(${yoy_growth_plan_numeric},${2024_gsv}) ;;
+    drill_fields: [accounts, dcom_scorecard,2025_planned_gsv,2024_gsv,yoy_growth_plan_percentage]
     value_format_name: percent_1
   }
   measure: yoy_growth_plan_numeric {
@@ -103,6 +121,7 @@ view: mars_forecast_unioned {
     description: "The difference between 2025 forecast data and 2024 actual data as a percentage."
     type: number
     sql: ${2025_planned_gsv} - ${2024_gsv} ;;
+    drill_fields: [accounts, dcom_scorecard,2025_planned_gsv,2024_gsv,yoy_growth_plan_numeric]
     # value_format_name: usd_0
     value_format: "$0.0,,\"M\""
   }
@@ -143,7 +162,7 @@ view: mars_forecast_unioned {
     description: "The year the GSV was accumalated."
     type: string
     sql: left(${yyyymm}, 4) ;;
-    drill_fields: [quarter,period,accounts]
+    drill_fields: [quarter,period_cleaned]
   }
   dimension: quarter {
     group_label: "Timeframes"
@@ -167,7 +186,7 @@ view: mars_forecast_unioned {
         sql: right(${yyyymm},2) = '10' or right(${yyyymm},2) = '11' or right(${yyyymm},2) = '12' or right(${yyyymm},2) = '13' ;;
       }
     }
-    drill_fields: [period]
+    drill_fields: [period_cleaned]
   }
   dimension: year_quarter {
     group_label: "Timeframes"
@@ -175,7 +194,7 @@ view: mars_forecast_unioned {
     description: "The quarter and year the GSV was accumalated. A more detailed look at quarter."
     type: string
     sql: concat(${year_cleaned}, " ", ${quarter}) ;;
-    drill_fields: [period]
+    drill_fields: [period_cleaned]
   }
 
 }
