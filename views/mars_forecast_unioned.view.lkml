@@ -58,7 +58,7 @@ view: mars_forecast_unioned {
     type: sum
     sql: ${value} ;;
     filters: [source: "2024_actual"]
-    drill_fields: [accounts, dcom_scorecard, 2024_gsv]
+    drill_fields: [accounts, dcom_scorecard, value]
     # value_format_name: usd_0
     value_format: "$0.0,,\"M\""
   }
@@ -69,7 +69,7 @@ view: mars_forecast_unioned {
     type: sum
     sql: ${value} ;;
     filters: [source: "2025_ytd_202507_and_forecast"]
-    drill_fields: [accounts, dcom_scorecard, 2025_gsv]
+    drill_fields: [accounts, dcom_scorecard, value]
     # value_format_name: usd_0
     value_format: "$0.0,,\"M\""
   }
@@ -80,7 +80,7 @@ view: mars_forecast_unioned {
     type: sum
     sql: ${value} ;;
     filters: [source: "2025_plan"]
-    drill_fields: [accounts, dcom_scorecard, 2025_planned_gsv]
+    drill_fields: [accounts, dcom_scorecard, value]
     # value_format_name: usd_0
     value_format: "$0.0,,\"M\""
   }
