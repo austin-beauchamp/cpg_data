@@ -21,18 +21,18 @@ view: mars_forecast_unioned {
     sql: ${TABLE}.period ;;
   }
   dimension: source {
-    # hidden: yes
+    hidden: yes
     type: string
     sql: ${TABLE}.source ;;
   }
   dimension: value {
-    # hidden: yes
+    hidden: yes
     type: number
     sql: ${TABLE}.value ;;
-    # value_format_name: usd_0
+    value_format_name: usd_0
   }
   measure: sum_value {
-    # hidden: yes
+    hidden: yes
     label: "Dollars"
     type: sum
     sql: ${value};;
